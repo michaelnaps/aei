@@ -1,18 +1,18 @@
 const int trn1 = 10;
-const int trn2 = 9;
+// const int trn2 = 9;
 
 void setup() {
   pinMode(trn1, OUTPUT);
-  pinMode(trn2, OUTPUT);
+  // pinMode(trn2, OUTPUT);
   Serial.begin(9600);
 }
 
 void loop() {
-  for (int i(0); i < 255; ++i) {
-    analogWrite(trn1, i);
-    analogWrite(trn2, i);
-    Serial.print(i); Serial.print(", "); Serial.println(i * (700 / 255));
+  for (int i(0); i < 255; i += 5) {
+    analogWrite(trn1, 255/2);
+    // analogWrite(trn2, i);
+    Serial.println(i);
 
-    delay(500);
+    delay(10000);
   }
 }
