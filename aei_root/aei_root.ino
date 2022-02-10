@@ -12,7 +12,7 @@
 */
 
 // FUNCTION DECLARATIONS
-int updateTCP(const int& pin, const int& val);
+int updateTCP(const int& pin, const int& pin_val, const int& val);
 
 // input and output pins
 const int js_x(A0), js_y(A1);
@@ -41,6 +41,9 @@ void setup() {
 }
 
 void loop() {
+  // tcp midrange
+  const int TCP_MID = 255 / 2;
+
   // read values from input pins
   const int js_x_val = analogRead(js_x);
   const int js_y_val = analogRead(js_y);
@@ -49,19 +52,22 @@ void loop() {
   const int AI_val   = digitalRead(AI);
 
   // TCP values to be updates
-  tcp1_val = tcp1_val + updateTCP(tcp1, js_x_val);
-  tcp2_val = tcp2_val + updateTCP(tcp2, js_x_val);
-  tcp3_val = tcp3_val + updateTCP(tcp3, js_y_val);
-  tcp4_val = tcp4_val + updateTCP(tcp4, js_y_val);
+  tcp1_val = tcp1_val + updateTCP(tcp1, tcp1_val, js_x_val);
+  tcp2_val = tcp2_val + updateTCP(tcp2, tcp2_val, js_x_val);
+  tcp3_val = tcp3_val + updateTCP(tcp3, tcp3_val, js_y_val);
+  tcp4_val = tcp4_val + updateTCP(tcp4, tcp4_val, js_y_val);
 
   // update analog TCP pins
-  analogWrite(tcp1, tcp1_val);
-  analogWrite(tcp2, tcp2_val);
-  analogWrite(tcp3, tcp3_val);
-  analogWrite(tcp4, tcp4_val);
+  analogWrite(tcp1, TCP_MID + tcp1_val / 2);
+  analogWrite(tcp2, TCP_MID - tcp2_val / 2);
+  analogWrite(tcp3, TCP_MID + tcp3_val / 2);
+  analogWrite(tcp4, TCP_MID - tcp4_val / 2);
 
-  Serial.print(js_x_val); Serial.print(", ");
-  Serial.print(js_y_val); Serial.print(", ");
-  Serial.print(tcp3_val); Serial.print(", ");
-  Serial.println(tcp4_val);
+  Serial.print(TCP_MID + tcp1_val / 2); Serial.print(", ");
+  Serial.print(TCP_MID - tcp2_val / 2); Serial.print(", ");
+  Serial.print(TCP_MID + tcp3_val / 2); Serial.print(", ");
+  Serial.print(TCP_MID - tcp4_val / 2); Serial.print(" | ");
+  Serial.print(extr_val); Serial.print(", ");
+  Serial.print(retr_val); Serial.print(", ");
+  Serial.println(AI_val);
 }

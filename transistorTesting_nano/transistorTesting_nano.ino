@@ -1,17 +1,18 @@
-const int trnPin = 10;
-const int potPin = 14;
+const int trn1 = 10;
+const int trn2 = 9;
 
 void setup() {
-  pinMode(trnPin, OUTPUT);
-  pinMode(potPin, INPUT);
+  pinMode(trn1, OUTPUT);
+  pinMode(trn2, OUTPUT);
   Serial.begin(9600);
 }
 
 void loop() {
-  const int pVal = analogRead(potPin);
+  for (int i(0); i < 255; ++i) {
+    analogWrite(trn1, i);
+    analogWrite(trn2, i);
+    Serial.print(i); Serial.print(", "); Serial.println(i * (700 / 255));
 
-  analogWrite(trnPin, (int)(pVal * 255 / 1023));
-
-  Serial.print(pVal); Serial.print(", ");
-  Serial.println((int)(pVal*255/1023));
+    delay(500);
+  }
 }
