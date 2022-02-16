@@ -18,7 +18,7 @@ void setup() {
 }
 
 void loop() {
-  const int mjs = 350;
+  const int mjs = 550;
   const int tol = 100;
 
   int newX = analogRead(jsX);
