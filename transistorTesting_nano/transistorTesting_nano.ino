@@ -18,20 +18,21 @@ void setup() {
 }
 
 void loop() {
+  const int pwm_max = 0.42*255;
   const int mjs = 550;
   const int tol = 100;
 
   int newX = analogRead(jsX);
   int newY = analogRead(jsY);
 
-  if (newX > (mjs + tol) && valX < 255) {
+  if (newX > (mjs + tol) && valX < pwm_max) {
     valX = valX + 1;
   }
   else if (newX < (mjs - tol) && valX > 0) {
     valX = valX - 1;
   }
 
-  if (newY > (mjs + tol) && valY < 255) {
+  if (newY > (mjs + tol) && valY < pwm_max) {
     valY = valY + 1;
   }
   else if (newY < (mjs - tol) && valY > 0) {
