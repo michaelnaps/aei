@@ -1,6 +1,6 @@
-bool printTCP(const int tcp_val[], const int adj[], const int &n)
+bool printTCP(const int tcp_val[], const int adj[], const int &tcp_max, const int &n)
 {
-  const int TCP_MID = 255/2;
+  const int TCP_MID = tcp_max/2;
   
   if (!Serial)
   {

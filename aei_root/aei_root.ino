@@ -15,9 +15,9 @@
 int updateTCP(const int& pin, const int& pin_val, const int& val);
 
 // input and output pins
-const int JS[] = {A0, A1};
-// const int ST[] = {A2, A3};
-// const int AI   =  A4;
+const int JS[]    = {A0, A1, A2};
+// const int ST[] = {A3, A4};
+// const int AI   =  A5;
 
 // output pins and info
 const int nTCP  = 4;
@@ -26,10 +26,16 @@ const int TCP[] = {5, 6, 9, 10};
 // values to be updated on each iteration
 int TCP_val[4] = {0};
 
+// constant loop variables for TCP
+const int TCP_MAX = 0.42*255;
+const int adj[] = {1, -1, 1, -1};
+
+
 void setup() {
   // INPUT PINS (Manual Operation)
   pinMode(JS[0], INPUT);
   pinMode(JS[1], INPUT);
+  pinMode(JS[2], INPUT_PULLUP);
 
   // OUTPUT PINS
   pinMode(TCP[0], INPUT);
@@ -42,14 +48,18 @@ void setup() {
 }
 
 void loop() {
-  // tcp value adjustment coefficient
-  const int adj[] = {1, -1, 1, -1};
-
   // read values from input pins (joystick)
-  const int JS_val[] = {analogRead(JS[0]), analogRead(JS[0]), analogRead(JS[1]), analogRead(JS[1])};
+  const int JS_val[] = {
+    analogRead(JS[0]), analogRead(JS[0]),
+    analogRead(JS[1]), analogRead(JS[1]),
+    digitalRead(JS[2])
+  };
+
+  // check joystick button
+  resetTCP(TCP_val, JS_val[4], TCP_MAX, nTCP);
 
   // update, write, and print TCP values
-  updateTCP(TCP_val, JS_val, adj, nTCP);
-  writeTCP(TCP, TCP_val, adj, nTCP);
-  printTCP(TCP_val, adj, nTCP);
+  updateTCP(TCP_val, JS_val, adj, TCP_MAX, nTCP);
+  writeTCP(TCP, TCP_val, adj, TCP_MAX, nTCP);
+  printTCP(TCP_val, adj, TCP_MAX, nTCP);
 }
