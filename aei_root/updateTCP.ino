@@ -2,7 +2,7 @@ bool updateTCP(int tcp_val[], const int js_val[], const int adj[], const int &tc
 {
   // tolerances for joystick parameters
   const int JS_MID = 600;
-  const int JS_TOL = 200;
+  const int JS_TOL = 400;
 
   for (int i(0); i < n; ++i) {
     if (js_val[i] > (JS_MID + JS_TOL) && tcp_val[i] < tcp_max) {
