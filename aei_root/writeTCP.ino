@@ -1,6 +1,6 @@
 bool writeTCP(const int tcp[], const int tcp_val[], const int adj[], const int &tcp_max, const int &n)
 {
-  const int TCP_MID = tcp_max/2;
+  const int TCP_MID = 0;
   
   for (int i(0); i < n; ++i)
   {

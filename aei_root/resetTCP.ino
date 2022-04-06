@@ -7,4 +7,6 @@ bool resetTCP(int tcp_val[], const int &js_button, const int &tcp_max, const int
       tcp_val[i] = 0;
     }
   }
+
+  return true;
 }

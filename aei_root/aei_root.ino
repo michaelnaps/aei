@@ -20,11 +20,12 @@ const int JS[]    = {A0, A1, A2};
 // const int AI   =  A5;
 
 // output pins and info
+const int nDIR  = 2;
 const int nTCP  = 4;
 const int TCP[] = {5, 6, 9, 10};
 
 // values to be updated on each iteration
-int TCP_val[4] = {0};
+int TCP_val[2] = {0};
 
 // constant loop variables for TCP
 const int TCP_MAX = 0.30*255;
@@ -50,13 +51,12 @@ void setup() {
 void loop() {
   // read values from input pins (joystick)
   const int JS_val[] = {
-    analogRead(JS[0]), analogRead(JS[0]),
-    analogRead(JS[1]), analogRead(JS[1]),
+    analogRead(JS[0]), analogRead(JS[1]),
     digitalRead(JS[2])
   };
 
   // check joystick button
-  resetTCP(TCP_val, JS_val[4], TCP_MAX, nTCP);
+  resetTCP(TCP_val, JS_val[2], TCP_MAX, nTCP);
 
   // update, write, and print TCP values
   updateTCP(TCP_val, JS_val, adj, TCP_MAX, nTCP);
