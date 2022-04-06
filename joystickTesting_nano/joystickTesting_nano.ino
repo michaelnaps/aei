@@ -18,23 +18,23 @@ void setup() {
 }
 
 void loop() {
-  const int mjs = 600;
-  const int tol = 100;
+  const int mjs = 500;
+  const int tol = 300;
 
   int newX = analogRead(jsX);
   int newY = analogRead(jsY);
 
-  if (newX > (mjs + tol) && valX < 255) {
+  if (newY > (mjs + tol) && valX < 255 && valY == 0) {
     valX = valX + 1;
   }
-  else if (newX < (mjs - tol) && valX > 0) {
+  else if (newY < (mjs - tol) && valX > 0) {
     valX = valX - 1;
   }
 
-  if (newY > (mjs + tol) && valY < 255) {
+  if (newY < (mjs - tol) && valY < 255 && valX == 0) {
     valY = valY + 1;
   }
-  else if (newY < (mjs - tol) && valY > 0) {
+  else if (newY > (mjs + tol) && valY > 0) {
     valY = valY - 1;
   }
 
