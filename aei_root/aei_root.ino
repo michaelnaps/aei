@@ -28,9 +28,8 @@ const int TCP[] = {5, 6, 9, 10};
 int TCP_val[] = {0, 0, 0, 0};
 
 // constant loop variables for TCP
-const int TCP_MAX = 0.30*255;
+const int TCP_MAX = 0.50*255;
 const int adj[] = {1, -1, 1, -1};
-
 
 void setup() {
   // INPUT PINS (Manual Operation)
